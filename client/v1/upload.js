@@ -143,7 +143,7 @@ function _sendChunkedRequest(session,url,job,sessionId,buffer,range){
             'Host': 'upload.instagram.com',
             'Session-ID': sessionId,
             'Content-Type': 'application/octet-stream',
-            'Content-Disposition': 'attachment; filename=\\\"video.mov\\\"',
+            'Content-Disposition': 'attachment; filename=\\\"video.mp4\\\"',
             'Content-Length': buffer.length,
             'Content-Range': range
         })
