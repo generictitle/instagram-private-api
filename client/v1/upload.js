@@ -67,7 +67,7 @@ Upload.video = function(session,videoBufferOrPath,photoStreamOrPath,width,height
     //Probably not the best way to upload video, best to use stream not to store full video in memory, but it's the easiest
     if(!width) width = 720;
     if(!height) height = 720;
-    var predictedUploadId = new Date().getTime();
+    var predictedUploadId = new Date().getTime() * 1000;
     var request = new Request(session);
     return Helpers.pathToBuffer(videoBufferOrPath)
         .then(function(buffer){
