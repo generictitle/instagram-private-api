@@ -44,7 +44,8 @@ Upload.photo = function (session, streamOrPath, uploadId, name) {
         .generateUUID()
         .setData({
             image_compression: JSON.stringify(compresion),
-            upload_id: predictedUploadId
+            upload_id: predictedUploadId,
+            media_type: 1
         })
         .transform(function(opts){
             opts.formData.photo = {
@@ -62,8 +63,10 @@ Upload.photo = function (session, streamOrPath, uploadId, name) {
         })
 }
 
-Upload.video = function(session,videoBufferOrPath,photoStreamOrPath){
+Upload.video = function(session,videoBufferOrPath,photoStreamOrPath,width,height){
     //Probably not the best way to upload video, best to use stream not to store full video in memory, but it's the easiest
+    if(!width) width = 720;
+    if(!height) height = 720;
     var predictedUploadId = new Date().getTime();
     var request = new Request(session);
     return Helpers.pathToBuffer(videoBufferOrPath)
@@ -79,8 +82,8 @@ Upload.video = function(session,videoBufferOrPath,photoStreamOrPath){
                 upload_id: predictedUploadId,
                 media_type: 2,
                 upload_media_duration_ms: Math.floor(duration),
-                upload_media_height:720,
-                upload_media_width:720
+                upload_media_height: Math.floor(width),
+                upload_media_width: Math.floor(height)
             })
             .send()
             .then(function(json) {
