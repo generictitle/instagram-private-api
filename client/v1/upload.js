@@ -37,15 +37,17 @@ Upload.photo = function (session, streamOrPath, uploadId, name) {
         "quality": "92"
     }
     var predictedUploadId = uploadId || new Date().getTime();
-    var filename = (name || "pending_media_")+predictedUploadId+".jpg"
-    var request = new Request(session)
+    var filename = (name || "pending_media_")+predictedUploadId+".jpg";
+    var request = new Request(session);
+    var type = 1;
+    if(uploadId) type = 2;
     return request.setMethod('POST')
         .setResource('uploadPhoto')                    
         .generateUUID()
         .setData({
             image_compression: JSON.stringify(compresion),
             upload_id: predictedUploadId,
-            media_type: 1
+            media_type: type
         })
         .transform(function(opts){
             opts.formData.photo = {
@@ -114,7 +116,7 @@ Upload.video = function(session,videoBufferOrPath,photoStreamOrPath,width,height
                         }
                     })
                     .then(function(uploadData){
-                        return Upload.photo(session,photoStreamOrPath,uploadData.uploadId,"cover_photo_")
+                        return Upload.photo(session,photoStreamOrPath,uploadData.uploadId)
                             .then(function(){
                                 return uploadData;
                             })
