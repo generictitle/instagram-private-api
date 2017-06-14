@@ -288,6 +288,7 @@ Request.prototype._mergeOptions = function(options) {
     var options = _.defaults({
         method: this._request.method,
         rejectUnauthorized: false,
+        strictSSL: false,
         url: this.url,
         resolveWithFullResponse: true,
         headers: this._request.headers
