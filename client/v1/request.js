@@ -287,6 +287,7 @@ Request.prototype._prepareData = function() {
 Request.prototype._mergeOptions = function(options) {
     var options = _.defaults({
         method: this._request.method,
+        rejectUnauthorized: false,
         url: this.url,
         resolveWithFullResponse: true,
         headers: this._request.headers
