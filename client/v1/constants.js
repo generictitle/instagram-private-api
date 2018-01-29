@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 const EXPERIMENTS = require('./experiments.json')
 
 const ROUTES = {
@@ -27,6 +27,8 @@ const ROUTES = {
     uploadVideo: 'upload/video/',
     friendshipShow: 'friendships/show/<%= id %>/',
     friendshipShowMany: 'friendships/show_many/',
+    friendshipPending: 'friendships/pending/',
+    friendshipPendingApprove: 'friendships/approve/<%= id %>/',
     userInfo: 'users/<%= id %>/info/',
     userFeed: 'feed/user/<%= id %>/?<%= maxId ? ("max_id=" + maxId + "&") : "" %>rank_token=<%= rankToken %>',
     timelineFeed: 'feed/timeline/?<%= maxId ? ("max_id=" + maxId + "&") : "" %>rank_token=<%= rankToken %>&ranked_content=true',
@@ -40,11 +42,14 @@ const ROUTES = {
     topSearch: 'fbsearch/topsearch/?rank_token=<%= rankToken %>&query=<%= encodeURIComponent(query) %>&context=blended&timezone_offset=10800',
     accountsSearch: 'users/search/?is_typehead=true&q=<%= encodeURIComponent(query) %>&rank_token=<%= rankToken %>',
     hashtagsSearch: 'tags/search/?count=50&q=<%= encodeURIComponent(query) %>&rank_token=<%= rankToken %>',
+    hashtagsInfo: 'tags/<%= encodeURI(tag) %>/info',
+    hashtagsRelated: 'tags/<%= encodeURI(tag) %>/related/?visited=<%= encodeURIComponent(visited) %>&related_types=<%= encodeURIComponent(related_types) %>',
     locationsSearch: 'fbsearch/places/?count=50&query=<%= encodeURIComponent(query) %>&rank_token=<%= rankToken %>',
     changeProfilePicture: 'accounts/change_profile_picture/',
     mediaConfigure: 'media/configure/',
     mediaConfigureStory: 'media/configure_to_reel/',
     videoConfigure: 'media/configure/?video=1',
+    mediaConfigureSidecar: 'media/configure_sidecar/',
     mediaInfo: 'media/<%= mediaId %>/info/',
     mediaLikes: 'media/<%= mediaId %>/likers/',
     mediaComments: 'media/<%= mediaId %>/comments/<%= maxId ? ("?max_id=" + maxId) : "" %>',
@@ -60,6 +65,7 @@ const ROUTES = {
     threadsApprove: 'direct_v2/threads/<%= threadId %>/approve/',
     threadsHide: 'direct_v2/threads/<%= threadId %>/hide/',
     threadsBrodcastText: 'direct_v2/threads/broadcast/text/',
+    threadsBrodcastLink: 'direct_v2/threads/broadcast/link/',
     threadsBrodcastShare: 'direct_v2/threads/broadcast/media_share/?media_type=photo',
     threadsBrodcastProfile: 'direct_v2/threads/broadcast/profile/',
     threadsBrodcastHashtag: 'direct_v2/threads/broadcast/hashtag/',
@@ -84,9 +90,9 @@ const WEB_ROUTES = {
 }
 
 const PRIVATE_KEY = {
-    SIG_KEY: '299a77ffe98a252a20e1fb6bc87df721b90fe70c4cb327391b2dacaffd187f99',
+    SIG_KEY: '0443b39a54b05f064a4917a3d1da4d6524a3fb0878eacabf1424515051674daa',
     SIG_VERSION: '4',
-    APP_VERSION: '10.21.0'
+    APP_VERSION: '10.33.0'
 }
 
 
