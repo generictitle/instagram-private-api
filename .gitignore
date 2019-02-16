@@ -5,3 +5,10 @@ npm-debug.log
 tests/tmp/*
 tests/credentials.json
 tests/cookies/*
+php-*
+cookies/
+sandbox.*
+Untitled*
+.idea
+.env
+dist
