@@ -25,13 +25,6 @@ class Upload extends Resource {
       upload_id: predictedUploadId,
     };
 
-    if (isSidecar) {
-      fields['is_sidecar'] = 1;
-      if (isThumbnail) {
-        fields['media_type'] = 2;
-      }
-    }
-
     return request
       .setMethod('POST')
       .setResource('uploadPhoto')
