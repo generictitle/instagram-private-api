@@ -60,15 +60,13 @@ class Upload extends Resource {
       if (duration > 63000) throw new Error(`Video is too long. Maximum: 63. Got: ${duration / 1000}`);
       fields = fields || {};
       fields.upload_id = predictedUploadId;
-      if (isSidecar) {
-        fields['is_sidecar'] = 1;
-      } else {
+
         fields['media_type'] = 2;
         fields['upload_media_duration_ms'] = Math.floor(duration);
         // Bugfix, when a disproportionate video is upload (e.g. 640x320)
         // fields['upload_media_height'] = 320;
         // fields['upload_media_width'] = 640;
-      }
+
       return request
         .setMethod('POST')
         .setBodyType('form')
@@ -195,9 +193,7 @@ function _sendChunkedRequest (session, url, job, sessionId, buffer, range, isSid
     'Content-Length': buffer.length,
     'Content-Range': range,
   };
-  if (isSidecar) {
-    headers['Cookie'] = `sessionid=${sessionId}`;
-  }
+
   return new Request(session)
     .setMethod('POST')
     .setBodyType('body')
